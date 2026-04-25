@@ -1,11 +1,13 @@
-# Phishing Website Detection Using Deep Learning and Association Rule Mining
+# Webpage Knowledge Discovery Using Clustering, Regression, Neural Networks, and Recommendation
 
-This project uses the UCI phishing websites dataset to build:
+This project uses the UCI phishing websites dataset to build a four-component machine learning review project:
 
-1. A deep learning based phishing detector using a multi-layer perceptron (ANN).
-2. An Association Rule Mining workflow using the Apriori algorithm to discover frequent phishing patterns.
+1. Clustering to discover groups of webpages with similar behavior.
+2. Regression to predict webpage traffic from the remaining website signals.
+3. Neural networks to classify websites as phishing or legitimate.
+4. A recommendation system to retrieve similar webpages for risk-aware analysis.
 
-The repository is structured to support a semester project review, GitHub submission, and PPT preparation.
+The repository is structured for project review, GitHub submission, and PPT preparation around one dataset and four required concepts.
 
 ## Dataset
 
@@ -18,9 +20,13 @@ The repository is structured to support a semester project review, GitHub submis
 
 ## Project Structure
 
-- `ml/random_forest_phishing.py` - existing baseline model
-- `ml/deep_learning_phishing.py` - ANN training, testing, and evaluation
-- `ml/association_rule_mining.py` - frequent pattern generation and rule evaluation
+- `ml/data_utils.py` - shared dataset paths and loaders
+- `ml/clustering_webpages.py` - K-Means clustering and cluster profiling
+- `ml/regression_web_traffic.py` - Random forest regression for `web_traffic`
+- `ml/deep_learning_phishing.py` - neural network classification
+- `ml/recommendation_system.py` - content-based similar webpage recommendation
+- `ml/random_forest_phishing.py` - optional baseline classifier
+- `ml/association_rule_mining.py` - previous exploratory script, not part of the required four components
 - `docs/presentation_outline.md` - slide-by-slide PPT content
 - `requirements.txt` - Python package requirements
 - `.gitignore` - ignores generated artifacts
@@ -35,59 +41,38 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## Run The Deep Learning Model
+## Run The Four Components
 
 ```powershell
+python ml\clustering_webpages.py
+python ml\regression_web_traffic.py
 python ml\deep_learning_phishing.py
+python ml\recommendation_system.py --query-index 0 --top-k 5
 ```
 
-The script performs:
+Representative outcomes observed on this dataset are approximately:
 
-- data loading and preprocessing
-- train/test split
-- ANN training with early stopping
-- test-set evaluation
-- 5-fold cross-validation
-- confusion matrix export
-- metrics export to CSV
-
-Expected performance from the configured model on this dataset is approximately:
-
-- Test Accuracy: `0.9692`
-- Precision: `0.9671`
-- Recall: `0.9781`
-- F1-score: `0.9725`
-- ROC-AUC: `0.9962`
-
-## Run Association Rule Mining
-
-```powershell
-python ml\association_rule_mining.py
-```
-
-The script performs:
-
-- transaction generation from categorical phishing features
-- frequent itemset mining with Apriori
-- association rule generation
-- rule quality measurement using support, confidence, lift, leverage, conviction
-- test-set validation of discovered rules
-
-Representative strong rules from this dataset include:
-
-- `URL_of_Anchor=-1 => Result=-1`
-- `SSLfinal_State=-1 => Result=-1`
-- `SSLfinal_State=1 => Result=1`
+- Clustering: best silhouette score near `0.2845` at `k = 3`
+- Regression (`web_traffic`): MAE `0.3211`, RMSE `0.5102`, R2 `0.6136`
+- Neural network: Accuracy `0.9692`, Precision `0.9671`, Recall `0.9781`, F1-score `0.9725`, ROC-AUC `0.9962`
+- Recommendation: same-class neighbor ratio about `0.9131`
 
 ## Output Files
 
 Running the scripts creates:
 
-- `outputs/deep_learning_metrics.csv`
-- `outputs/deep_learning_cv_metrics.csv`
-- `outputs/deep_learning_confusion_matrix.csv`
-- `outputs/frequent_itemsets.csv`
-- `outputs/association_rules.csv`
+- `outputs/clustering_k_selection.csv`
+- `outputs/clustering_summary.csv`
+- `outputs/clustering_feature_means.csv`
+- `outputs/regression_metrics.csv`
+- `outputs/regression_cv_metrics.csv`
+- `outputs/regression_feature_importance.csv`
+- `outputs/regression_sample_predictions.csv`
+- `outputs/neural_network_metrics.csv`
+- `outputs/neural_network_cv_metrics.csv`
+- `outputs/neural_network_confusion_matrix.csv`
+- `outputs/recommendations.csv`
+- `outputs/recommendation_metrics.csv`
 
 ## Suggested PPT Flow
 
@@ -96,11 +81,11 @@ Use the content in `docs/presentation_outline.md` for your review PPT:
 1. Title
 2. Problem statement
 3. Dataset description
-4. Methodology
-5. Deep learning model
-6. Deep learning results
-7. Association rule mining model
-8. Frequent pattern results
+4. Clustering component
+5. Regression component
+6. Neural network component
+7. Recommendation system component
+8. Comparative findings
 9. GitHub repository link
 10. Conclusion and future work
 
@@ -111,7 +96,7 @@ Initialize git and push to GitHub after creating an empty repository in your acc
 ```powershell
 git init
 git add .
-git commit -m "Add deep learning and association rule mining project"
+git commit -m "Add four-component webpage knowledge discovery project"
 git branch -M main
 git remote add origin <your-github-repo-url>
 git push -u origin main

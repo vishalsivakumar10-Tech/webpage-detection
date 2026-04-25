@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1100" viewBox="0 0 1400 1100">
+  <rect width="1400" height="1100" fill="#f7f4ea"/>
+  <rect x="40" y="40" width="1320" height="1020" rx="24" fill="#fffdf8" stroke="#1f3a5f" stroke-width="4"/>
+  <text x="80" y="110" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700" fill="#1f3a5f">Model Comparison: Why ANN Was Selected</text>
+  <text x="80" y="160" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#3d4c5c">Semester project: phishing website detection using deep learning and association rule mining</text>
+
+  <rect x="80" y="210" width="580" height="330" rx="18" fill="#eaf4ff" stroke="#2e6da4" stroke-width="3"/>
+  <text x="110" y="260" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#204d74">Random Forest</text>
+  <text x="110" y="305" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#204d74">Advantages</text>
+  <text x="130" y="345" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Works well on structured tabular data</text>
+  <text x="130" y="380" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Handles non-linear decision boundaries</text>
+  <text x="130" y="415" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Provides feature importance</text>
+  <text x="130" y="450" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Strong baseline for phishing detection</text>
+  <text x="110" y="500" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#204d74">Limitations</text>
+  <text x="130" y="535" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Not a deep learning model</text>
+
+  <rect x="740" y="210" width="580" height="330" rx="18" fill="#eafaf1" stroke="#2d7d46" stroke-width="3"/>
+  <text x="770" y="260" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#245c35">Artificial Neural Network (ANN)</text>
+  <text x="770" y="305" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#245c35">Advantages</text>
+  <text x="790" y="345" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Learns complex non-linear patterns</text>
+  <text x="790" y="380" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Captures interactions among many features</text>
+  <text x="790" y="415" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Satisfies the deep learning requirement</text>
+  <text x="790" y="450" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Achieved high performance on this dataset</text>
+  <text x="770" y="500" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#245c35">Limitations</text>
+  <text x="790" y="535" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">• Lower interpretability than tree-based models</text>
+
+  <rect x="80" y="590" width="1240" height="170" rx="18" fill="#fff4e8" stroke="#cc7a00" stroke-width="3"/>
+  <text x="110" y="640" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" fill="#8a5200">Why ANN Was Chosen</text>
+  <text x="130" y="685" font-family="Segoe UI, Arial, sans-serif" font-size="21" fill="#22313f">• The task explicitly required a deep learning technique.</text>
+  <text x="130" y="720" font-family="Segoe UI, Arial, sans-serif" font-size="21" fill="#22313f">• Website features interact in a non-linear way, which ANN models effectively.</text>
+  <text x="130" y="755" font-family="Segoe UI, Arial, sans-serif" font-size="21" fill="#22313f">• The ANN produced strong classification results on the phishing dataset.</text>
+
+  <rect x="80" y="800" width="1240" height="190" rx="18" fill="#f3eefc" stroke="#6f42c1" stroke-width="3"/>
+  <text x="110" y="850" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" fill="#53328c">ANN Performance Summary</text>
+  <text x="130" y="895" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#22313f">Accuracy: 96.92%</text>
+  <text x="430" y="895" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#22313f">Precision: 96.71%</text>
+  <text x="760" y="895" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#22313f">Recall: 97.81%</text>
+  <text x="1050" y="895" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#22313f">F1-score: 97.25%</text>
+  <text x="130" y="935" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#22313f">ROC-AUC: 99.62%</text>
+  <text x="130" y="975" font-family="Segoe UI, Arial, sans-serif" font-size="20" fill="#22313f">Conclusion: Random Forest is a useful baseline, but ANN was selected as the main model because it meets the deep learning requirement and captures complex feature interactions more effectively.</text>
+</svg>

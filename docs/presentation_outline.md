@@ -2,7 +2,7 @@
 
 ## Slide 1: Title
 
-**Title:** Phishing Website Detection Using Deep Learning and Association Rule Mining
+**Title:** Webpage Knowledge Discovery Using Clustering, Regression, Neural Networks, and Recommendation
 
 - Student name
 - Register number
@@ -11,17 +11,17 @@
 
 ## Slide 2: Problem Statement
 
-- Phishing websites imitate trusted websites to steal user credentials and private data.
-- Traditional detection methods are not always enough for identifying new phishing patterns.
-- The objective is to classify websites as phishing or legitimate and discover hidden patterns from the same dataset.
+- Webpages have multiple observable signals such as URL structure, SSL state, traffic, and domain behavior.
+- These signals can be used not only for classification but also for segmentation, prediction, and similarity-based retrieval.
+- The objective is to use one dataset to demonstrate four machine learning concepts required for project review.
 
 ## Slide 3: Objectives
 
-- Build a deep learning model for phishing website detection.
-- Train and test the model on the phishing dataset.
-- Measure model performance using standard classification metrics.
-- Generate frequent patterns and rules using Association Rule Mining.
-- Evaluate the quality of generated rules.
+- Apply clustering to group webpages with similar feature behavior.
+- Build a regression model to predict `web_traffic`.
+- Build a neural network to classify phishing and legitimate websites.
+- Build a recommendation system to retrieve similar webpages.
+- Compare what each component contributes to knowledge discovery.
 
 ## Slide 4: Dataset Description
 
@@ -38,112 +38,86 @@
   - `URL_of_Anchor`
   - `web_traffic`
 
-## Slide 5: Methodology
+## Slide 5: Clustering Methodology
 
-- Data loading and preprocessing
-- Train-test split
-- Deep learning model training using ANN
-- Model testing and metric calculation
-- Frequent itemset generation using Apriori
-- Association rule generation and rule evaluation
+- Data preprocessing using imputation and scaling
+- K-Means clustering tested for multiple `k` values
+- Silhouette score used for cluster selection
+- Cluster profiles interpreted using phishing ratio, page rank, and web traffic
 
-## Slide 6: Deep Learning Model
+## Slide 6: Clustering Results
 
-**Technique:** Multi-Layer Perceptron (Artificial Neural Network)
+- Best silhouette score observed near `0.2845`
+- Best number of clusters: `3`
+- Each cluster represents a different webpage behavior segment
+- Use cluster summaries from `clustering_summary.csv`
 
-- Input layer: phishing website features
+## Slide 7: Regression Methodology
+
+- Target variable: `web_traffic`
+- Model: Random Forest Regressor
+- Input: all remaining webpage features
+- Evaluation metrics: MAE, RMSE, and R2
+- Cross-validation used for stability checking
+
+## Slide 8: Regression Results
+
+- MAE: `0.3211`
+- RMSE: `0.5102`
+- R2: `0.6136`
+- Important predictors generally include security and ranking related features
+- Use `regression_feature_importance.csv` for charts
+
+## Slide 9: Neural Network Methodology
+
+- Technique: Multi-Layer Perceptron
 - Hidden layers: `64`, `32`, `16`
 - Activation: `ReLU`
 - Optimizer: `Adam`
-- Early stopping used to prevent overfitting
-- Target mapping:
-  - phishing = `0`
-  - legitimate = `1`
+- Early stopping used to reduce overfitting
+- Output: phishing vs legitimate webpage classification
 
-## Slide 7: Deep Learning Performance
-
-Use these results from the implemented model:
+## Slide 10: Neural Network Results
 
 - Accuracy: `96.92%`
 - Precision: `96.71%`
 - Recall: `97.81%`
 - F1-score: `97.25%`
 - ROC-AUC: `99.62%`
+- Show confusion matrix from `neural_network_confusion_matrix.csv`
 
-5-fold cross-validation average:
+## Slide 11: Recommendation System Methodology
 
-- Accuracy: `96.25%`
-- Precision: `96.37%`
-- Recall: `96.91%`
-- F1-score: `96.64%`
-- ROC-AUC: `99.41%`
+- Approach: content-based recommendation using nearest neighbors
+- Similarity metric: cosine similarity
+- Input: preprocessed webpage feature vectors
+- Output: most similar webpages for a given query page
+- Evaluation: same-class neighbor ratio
 
-Confusion matrix:
+## Slide 12: Recommendation Results
 
-- True phishing detected: `939`
-- Legitimate predicted as phishing: `41`
-- Phishing predicted as legitimate: `27`
-- True legitimate detected: `1204`
+- Same-class neighbor ratio: `91.31%`
+- Similar webpages usually share the same phishing or legitimate label
+- Recommendation can support analysts by surfacing look-alike cases
+- Show sample recommendations from `recommendations.csv`
 
-## Slide 8: Association Rule Mining
+## Slide 13: Comparative Insight
 
-**Technique:** Apriori Algorithm
+- Clustering explains hidden segments in the data
+- Regression predicts an operational numeric signal
+- Neural networks deliver the strongest predictive performance
+- Recommendation adds similarity-based decision support
 
-- Transactions were formed by converting each feature-value pair into an item.
-- Minimum support: `20%`
-- Minimum confidence: `80%`
-- Measures used:
-  - support
-  - confidence
-  - lift
-  - leverage
-  - conviction
-
-## Slide 9: Important Frequent Patterns And Rules
-
-Strong rules obtained:
-
-1. `URL_of_Anchor=-1 => Result=-1`
-   - Support: `29.51%`
-   - Confidence: `98.90%`
-   - Lift: `2.23`
-
-2. `SSLfinal_State=-1 => Result=-1`
-   - Support: `27.75%`
-   - Confidence: `85.62%`
-   - Lift: `1.93`
-
-3. `SSLfinal_State=1 => Result=1`
-   - Support: `50.87%`
-   - Confidence: `89.02%`
-   - Lift: `1.60`
-
-4. `URL_of_Anchor=1 => Result=1`
-   - Support: `20.60%`
-   - Confidence: `93.87%`
-   - Lift: `1.69`
-
-## Slide 10: Association Rule Performance
-
-- Number of strong rules generated: `5`
-- Highest confidence rule:
-  - `URL_of_Anchor=-1 => Result=-1`
-  - Test confidence: `98.91%`
-- Highest coverage rule:
-  - `SSLfinal_State=1 => Result=1`
-  - Test coverage: `57.76%`
-
-## Slide 11: Tools And Technologies
+## Slide 14: Tools And Technologies
 
 - Python
 - Pandas
 - NumPy
 - Scikit-learn
-- Apriori-based pattern mining
 - GitHub for code hosting
 - Microsoft PowerPoint / Google Slides
 
-## Slide 12: GitHub Repository
+## Slide 15: GitHub Repository
 
 Add your repository URL here:
 
@@ -153,26 +127,29 @@ Suggested note:
 
 - Full source code, dataset reference, outputs, and documentation are available in the GitHub repository.
 
-## Slide 13: Conclusion
+## Slide 16: Conclusion
 
-- The ANN model achieved high accuracy and ROC-AUC for phishing website detection.
-- Association rule mining exposed interpretable phishing indicators from website features.
-- Combining prediction and pattern discovery makes the project stronger for academic review.
+- The same webpage dataset supports four different machine learning tasks.
+- The neural network gives strong classification performance.
+- Regression and clustering provide additional analytical understanding.
+- Recommendation adds practical similarity-based support for analysts.
 
-## Slide 14: Future Scope
+## Slide 17: Future Scope
 
-- Try TensorFlow or PyTorch models for deeper architectures.
-- Deploy the classifier as a web application.
-- Use live URL feature extraction.
-- Add SHAP or feature interpretation for explainability.
+- Try DBSCAN or hierarchical clustering for different segments.
+- Use gradient boosting for regression comparison.
+- Deploy the classifier and recommender in a web interface.
+- Add explainability such as SHAP for model interpretation.
 
-## Slide 15: Demo Plan
+## Slide 18: Demo Plan
 
 During the review, show:
 
 1. Dataset file
-2. Deep learning code
-3. Association rule mining code
-4. Generated output CSV files
-5. GitHub repository link
-6. Final result slides
+2. Clustering code
+3. Regression code
+4. Neural network code
+5. Recommendation code
+6. Generated output CSV files
+7. GitHub repository link
+8. Final result slides

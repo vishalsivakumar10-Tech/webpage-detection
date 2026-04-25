@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webpage Detection Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <nav class="topbar">
+      <div class="brand-block">
+        <div class="brand-mark">WD</div>
+        <div>
+          <p class="eyebrow">Academic Project</p>
+          <strong>Webpage Detection Studio</strong>
+        </div>
+      </div>
+      <div class="topbar-meta">
+        <span>Phishing Analysis</span>
+        <span>ML + DL + Recommendation</span>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="hero-copy-inner">
+          <div>
+            <p class="eyebrow">ML + DL Webpage Intelligence</p>
+            <h1>Professional phishing detection for live webpage review.</h1>
+            <p class="hero-text">
+              Paste a URL, add optional page text or HTML, and generate a clear verdict with extracted security signals, cluster insight, and recommendation support.
+            </p>
+          </div>
+          <div class="hero-ribbon">
+            <span>Live URL inspection</span>
+            <span>Signal extraction</span>
+            <span>Recommendation output</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-panel glass">
+        <div class="hero-panel-header">
+          <p class="eyebrow">Project summary</p>
+          <h2>Model dashboard</h2>
+        </div>
+        <div class="metric-grid">
+          <div class="metric-card">
+            <span>Model accuracy</span>
+            <strong id="accuracyMetric">--</strong>
+          </div>
+          <div class="metric-card">
+            <span>Regression R2</span>
+            <strong id="r2Metric">--</strong>
+          </div>
+          <div class="metric-card">
+            <span>Dataset size</span>
+            <strong id="recordsMetric">--</strong>
+          </div>
+        </div>
+        <div class="mini-note">
+          Use the sample scenarios below for quick testing during your project review.
+        </div>
+     </div>
+    </header>
+
+    <section class="samples glass">
+      <div class="section-heading compact">
+        <p class="eyebrow">Demo cases</p>
+        <h2>One-click sample values</h2>
+      </div>
+      <div class="sample-grid">
+        <button class="sample-card" type="button" data-sample="legitimate">
+          <span>Legitimate sample</span>
+          <strong>Secure service login</strong>
+          <p>HTTPS URL, clean content, branded copy, and minimal suspicious signals.</p>
+        </button>
+        <button class="sample-card" type="button" data-sample="phishing">
+          <span>Phishing sample</span>
+          <strong>Urgent account verification</strong>
+          <p>Suspicious keywords, fake secure language, iframe/email form hints, and a risky URL pattern.</p>
+        </button>
+        <button class="sample-card" type="button" data-sample="mixed">
+          <span>Borderline sample</span>
+          <strong>Promotional redirect page</strong>
+          <p>Looks partially valid but contains redirects, marketing popups, and weaker trust signals.</p>
+        </button>
+      </div>
+    </section>
+
+    <main class="dashboard">
+      <section class="panel glass form-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Live analysis</p>
+          <h2>Inspect a webpage source</h2>
+        </div>
+        <div class="source-stack">
+          <div class="field field-wide">
+            <label for="urlInput">Webpage URL</label>
+            <input id="urlInput" name="url" type="text" placeholder="https://example.com/login">
+          </div>
+          <div class="field field-wide">
+            <label for="textInput">Optional webpage text or pasted content</label>
+            <textarea id="textInput" name="text" rows="5" placeholder="Paste visible page text, suspicious messages, or snippets from the webpage."></textarea>
+          </div>
+          <div class="field field-wide">
+            <label for="htmlInput">Optional HTML snippet</label>
+            <textarea id="htmlInput" name="html" rows="5" placeholder="<form action='mailto:...'> or pasted HTML source"></textarea>
+          </div>
+        </div>
+        <details class="advanced-panel">
+          <summary>Advanced feature overrides</summary>
+          <p class="advanced-copy">Use these only when you want to manually adjust extracted signals from the dataset feature set.</p>
+          <form id="predictionForm" class="feature-grid"></form>
+        </details>
+        <div class="action-row">
+          <button id="predictButton" class="primary-button" type="button">Analyze Webpage</button>
+          <button id="clearButton" class="secondary-button" type="button">Clear Inputs</button>
+        </div>
+      </section>
+
+      <section class="panel glass results-panel">
+        <div class="section-heading">
+          <p class="eyebrow">Decision output</p>
+          <h2>Prediction results</h2>
+        </div>
+        <div class="result-highlight">
+          <span id="labelBadge" class="status-badge neutral">Awaiting input</span>
+          <strong id="probabilityText">Probability: --</strong>
+        </div>
+        <div class="result-grid">
+          <article class="result-card">
+            <span>Predicted traffic</span>
+            <strong id="trafficText">--</strong>
+          </article>
+          <article class="result-card">
+            <span>Assigned cluster</span>
+            <strong id="clusterText">--</strong>
+          </article>
+        </div>
+        <div>
+          <h3>Detected components</h3>
+          <div id="findings" class="findings"></div>
+        </div>
+        <div>
+          <h3>Analysis notes</h3>
+          <div id="notes" class="notes-list"></div>
+        </div>
+        <div>
+          <h3>Similar webpages</h3>
+          <div id="recommendations" class="recommendations"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

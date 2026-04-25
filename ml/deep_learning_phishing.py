@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import pandas as pd
@@ -17,21 +18,11 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+CURRENT_DIR = Path(__file__).resolve().parent
+if str(CURRENT_DIR) not in sys.path:
+    sys.path.insert(0, str(CURRENT_DIR))
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT_DIR / "dataset" / "uci-ml-phishing-dataset (1).csv"
-OUTPUT_DIR = ROOT_DIR / "outputs"
-
-
-def load_dataset() -> tuple[pd.DataFrame, pd.Series]:
-    df = pd.read_csv(DATA_PATH)
-
-    if "id" in df.columns:
-        df = df.drop(columns=["id"])
-
-    features = df.drop(columns=["Result"])
-    target = df["Result"].map({-1: 0, 1: 1})
-    return features, target
+from data_utils import OUTPUT_DIR, load_classification_data
 
 
 def build_model() -> Pipeline:
@@ -112,7 +103,7 @@ def evaluate_cross_validation(features: pd.DataFrame, target: pd.Series) -> pd.D
 def main() -> None:
     OUTPUT_DIR.mkdir(exist_ok=True)
 
-    features, target = load_dataset()
+    features, target = load_classification_data()
 
     x_train, x_test, y_train, y_test = train_test_split(
         features,
@@ -128,11 +119,11 @@ def main() -> None:
     holdout_metrics, confusion_df = evaluate_holdout(model, x_test, y_test)
     cv_metrics = evaluate_cross_validation(features, target)
 
-    holdout_metrics.to_csv(OUTPUT_DIR / "deep_learning_metrics.csv", index=False)
-    confusion_df.to_csv(OUTPUT_DIR / "deep_learning_confusion_matrix.csv")
-    cv_metrics.to_csv(OUTPUT_DIR / "deep_learning_cv_metrics.csv", index=False)
+    holdout_metrics.to_csv(OUTPUT_DIR / "neural_network_metrics.csv", index=False)
+    confusion_df.to_csv(OUTPUT_DIR / "neural_network_confusion_matrix.csv")
+    cv_metrics.to_csv(OUTPUT_DIR / "neural_network_cv_metrics.csv", index=False)
 
-    print("Deep Learning Model Performance")
+    print("Neural Network Model Performance")
     print(holdout_metrics.to_string(index=False))
     print("\nConfusion Matrix")
     print(confusion_df.to_string())
